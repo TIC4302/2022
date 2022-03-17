@@ -110,7 +110,26 @@ jobs:
           path: logs/output.json
 
 
-  
+  container-scan:
+   needs: [test, sast]
+   runs-on: ubuntu-latest
+ 
+   steps:
+     - name: Run Dockle
+       uses: erzz/dockle-action@v1.1.1
+       with:
+         image: sristisravan/tic4302-demo
+         report-format: json
+         report-name: dockle-report
+        
+     - name: Upload Report
+       uses: actions/upload-artifact@v2
+       if: always()
+       with:
+         name: Dockle Report
+         path: dockle-report.json
+ 
+
   
   deploy:
     needs: [test,sast]
