@@ -113,7 +113,7 @@ jobs:
   
   
   deploy:
-    needs: [dast]
+    needs: [test,sast]
     runs-on: ubuntu-latest
 
     steps:
