@@ -331,5 +331,18 @@ def adduser():
     out,error = cmd.communicate()
     return str(out.decode()) + str(error.decode())
 
+
+@app.after_request
+def apply_caching(response):
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["server"] = 'Simple-Web-Server'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
