@@ -132,7 +132,7 @@ jobs:
 
   
   deploy:
-    needs: [test,sast]
+    needs: [container-scan]
     runs-on: ubuntu-latest
 
     steps:
