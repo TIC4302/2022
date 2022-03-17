@@ -340,7 +340,6 @@ def apply_caching(response):
     response.headers['Content-Security-Policy'] = "default-src 'self'"
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
     response.headers['Cache-Control'] = 'public, max-age=0'
     
 
